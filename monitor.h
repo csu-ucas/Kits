@@ -31,10 +31,12 @@ private:
     std::string fetch_schedule_info();
 
     // Writting to etcd
-
+    bool send_pulse_etcd();
+    
     // Sending a copy of info that are originally
     // to etcd to c-agent
-
+    bool send_pulse_cagent();
+    
 
 public:
     Monitor();
