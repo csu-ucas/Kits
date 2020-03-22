@@ -1,14 +1,24 @@
 #include "monitor.h"
-
-Monitor::Monitor() {
-    this->cmt = Communicator()
+#include "utils.h"
+#include <iostream>
+#include <string.h>
+Monitor::Monitor(int id) {
+    this->monitor_id = id;
 }
+
 
 State Monitor::get_sensor_status();
 
-float Monitor::get_cpu_workload();
+float Monitor::get_cpu_workload() {
+    std::string cmd = "mpstat | grep all | awk -F \" \" '{print $NF}'";
+    std::strstream ss;
+    ss << cmd;
+    float ret = 0;
+    ss >> ret;
+    return ret;
+}
 
-State Monitor::get_FPGA_status();
+// State Monitor::get_FPGA_status();
 
 State Monitor::fetch_schedule_result();
 
