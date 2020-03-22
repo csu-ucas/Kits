@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -7,13 +6,11 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h> 
-#include "communicator.h"
-void error(const char * msg) {
-    perror(msg);
-}
+#include "sender.h"
+#include "utils.h"
 
 
-Communicator::Communicator(char * serv_hostname, int serv_port) {
+Sender::Sender(char * serv_hostname, int serv_port) {
     this->if_established = false;
     struct hostent * server = gethostbyname(serv_hostname);
     this->serv_port = serv_port;
@@ -45,7 +42,7 @@ Communicator::Communicator(char * serv_hostname, int serv_port) {
     }                  
 }
 
-bool Communicator::send(const char * buffer) {
+bool Sender::send(const char * buffer) {
     int n = 0;
     printf("%s, %d", buffer, strlen(buffer));
     n = write(sockfd,buffer,strlen(buffer));

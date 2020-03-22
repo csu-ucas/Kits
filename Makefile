@@ -1,11 +1,17 @@
 CFLAGS = -O
 CC = g++
 
-test: communicator.o comm_test.o
-	$(CC) $(CFLAGS) comm_test.o communicator.o -o test
+receive_test: receiver.o recv_test.o
+	$(CC) $(CFLAGS) recv_test.o receiver.o -o receive_test
 
-communicator.o:
-	$(CC) $(CFLAGS) -c communicator.cpp
+sender_test: sender.o send_test.o
+	$(CC) $(CFLAGS) send_test.o sender.o -o sender_test
+
+sender.o:
+	$(CC) $(CFLAGS) -c sender.cpp
+
+receiver.o:
+	$(CC) $(CFLAGS) -c receiver.cpp
 
 comm_test.o: comm_test.cpp 
 	$(CC) $(CFLAGS) -c comm_test.cpp

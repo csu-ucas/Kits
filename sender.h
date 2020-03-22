@@ -1,7 +1,5 @@
-#ifndef COMMUNICATOR_H
-#define COMMUNICATOR_H
-
-
+#ifndef SENDER_H
+#define SENDER_H 
 
 #define SERV_MOD 0x0
 #define CLNT_MOD 0x1
@@ -16,21 +14,16 @@
 #include <netinet/in.h>
 #include <netdb.h> 
 
-
-
-
-
-class Communicator {
+class Sender {
 private:
     bool if_established;
     int sockfd;
     int serv_port;
     struct sockaddr_in serv_addr;
 
-
 public:
-    Communicator(char * serv_hostname, int serv_port);
-    ~Communicator(); 
+    Sender(char * serv_hostname, int serv_port);
+    ~Sender(); 
     bool send(const char * buffer);
     bool recv(char msg);
 };
