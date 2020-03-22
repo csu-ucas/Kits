@@ -2,8 +2,9 @@
 #define MONITOR_H
 
 #include <string>
-#include "sensor.h"
-#include "communicator.h"
+#include "sender.h"
+#include "receiver.h"
+
 enum State {
     ACTIVE,
     DEAD,
@@ -14,7 +15,11 @@ enum State {
 class Monitor {
 private:
     int monitor_id;
-    Communicator * cmt;
+    Sender * send_etcd;
+    Receiver * recv_etcd;
+    
+    Sender * send_cagent;
+    Receiver * recv_schd;
     
     /* Private functions that are limited-used by
     * class-internal process. */
@@ -36,6 +41,7 @@ private:
     // Sending a copy of info that are originally
     // to etcd to c-agent
     bool send_pulse_cagent();
+
     
 
 public:

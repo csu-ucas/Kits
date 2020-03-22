@@ -5,14 +5,11 @@
 #define CLNT_MOD 0x1
 #define BUFF_SIZE 0xf000
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
+#include <iostream>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <netdb.h> 
+#include "sender.h"
 
 class Sender {
 private:
@@ -22,9 +19,9 @@ private:
     struct sockaddr_in serv_addr;
 
 public:
-    Sender(char * serv_hostname, int serv_port);
+    Sender(std::string serv_hostname_str, int serv_port);
     ~Sender(); 
-    bool send(const char * buffer);
+    bool send(std::string msg);
     bool recv(char msg);
 };
 

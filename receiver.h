@@ -1,14 +1,13 @@
 #ifndef RECEIVER_H
 #define RECEIVER_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
+#include <string>
+#include <queue>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h> 
+using namespace std; 
 
 class Receiver {
 private:
@@ -17,13 +16,16 @@ private:
     int port;
     socklen_t client_len;
     char buffer[256];
+    
     struct sockaddr_in serv_addr;
     struct sockaddr_in cli_addr;
 
+
 public:
+    queue<std::string> * msgq;
     Receiver(int port);
     ~Receiver();
-    char * receive();
+    void receive();
 };
 
 

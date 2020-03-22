@@ -1,11 +1,17 @@
 #include "receiver.h"
 // #include "sender.h"
-
+#include <iostream>
+using namespace std;
 int main() {
     int port = 23333;
     Receiver * rcv = new Receiver(port);
-    // Sender * cmt = new Sender("localhost", port);
-    // const char * buffer = "Hello, world";
-    // cmt->send("We are the world");
-    // return 0;
+    for (int i = 0; i < 5; i++) {
+        rcv->receive();
+    } 
+    for (int i = 0; i < 5; i++) {
+        cout << rcv->msgq->front() << endl;
+        rcv->msgq->pop();
+    }
+    rcv->~Receiver();
+
 }
