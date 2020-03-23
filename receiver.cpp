@@ -28,6 +28,15 @@ Receiver::Receiver(int port) {
 
 }
 
+int Receiver::get_client_port() {
+    return this->cli_addr.sin_port;
+}
+
+std::string Receiver::get_client_ip() {
+    std::string ret(inet_ntoa(cli_addr.sin_addr));
+    return ret;
+}
+
 Receiver::~Receiver() {
     close(this->accept_sockfd);
     close(this->listen_sockfd);

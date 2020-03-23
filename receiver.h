@@ -16,7 +16,6 @@ private:
     int port;
     socklen_t client_len;
     char buffer[256];
-    
     struct sockaddr_in serv_addr;
     struct sockaddr_in cli_addr;
 
@@ -26,6 +25,9 @@ public:
     Receiver(int port);
     ~Receiver();
     void receive();
+    int get_client_port();
+    std::string get_client_ip();
+    void run();
 };
 
 
