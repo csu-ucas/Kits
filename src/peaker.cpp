@@ -9,3 +9,7 @@ float Peaker::get_cpu_workload() {
     ss >> ret;
     return ret;
 }
+
+std::string Peaker::make_pulse() {
+    return "Pulse Sample";
+}
