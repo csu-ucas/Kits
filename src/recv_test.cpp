@@ -1,5 +1,4 @@
-#include "receiver.h"
-// #include "sender.h"
+#include <communicator/receiver.h>
 #include <iostream>
 using namespace std;
 int main() {

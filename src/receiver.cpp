@@ -7,8 +7,9 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h> 
-#include "receiver.h"
-#include "utils.h"
+#include <arpa/inet.h>
+#include <communicator/receiver.h>
+#include <utils.h>
 
 Receiver::Receiver(int port) {
     this->msgq = new queue<std::string>();

@@ -4,8 +4,8 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h> 
-#include "sender.h"
-#include "utils.h"
+#include <communicator/sender.h>
+#include <utils.h>
 
 
 Sender::Sender(std::string serv_hostname_str, int serv_port) {

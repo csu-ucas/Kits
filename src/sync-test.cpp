@@ -1,6 +1,6 @@
 #include <iostream>
-#include "receiver.h"
-#include "sender.h"
+#include <communicator/sender.h>
+#include <communicator/receiver.h>
 
 using namespace std;
 

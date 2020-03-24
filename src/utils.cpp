@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sys/types.h>
 #include <string.h>
+#include <utils.h>
 
 void error(const char * msg) {
     perror(msg);
