@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <dockertask.h>
 
 class Peaker {
 private:
@@ -13,7 +14,7 @@ private:
     
     State get_FPGA_status();
 
-    State get_docker_status();
+    State get_docker_status(DockerTask * task);
 
     
 

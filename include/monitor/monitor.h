@@ -2,9 +2,9 @@
 #define MONITOR_H
 
 #include <string>
-#include "sender.h"
-#include "receiver.h"
-#include "utils.h"
+#include <communicator/sender.h>
+#include <communicator/receiver.h>
+#include <utils.h>
 
 class Monitor {
 private:
