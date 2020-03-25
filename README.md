@@ -23,6 +23,7 @@ int main() {
     Sender * cmt = new Sender("localhost", port);
     std::string msg = "Hello, world";   // Message to be sent
     cmt->send(msg);
+    delete cmt;                         // Very important
     return 0;
 }
 ```
@@ -42,5 +43,6 @@ int main() {
         rcv->msgq->pop();                   // Pop the queue
     }
     rcv->~Receiver();
+    delete rcv;
 }
 ```

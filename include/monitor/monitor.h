@@ -1,21 +1,26 @@
 #ifndef MONITOR_H
 #define MONITOR_H
 
-#include <string>
-#include <communicator/sender.h>
-#include <communicator/receiver.h>
-#include <utils.h>
+#include <monitor/monitor.h>
+#include <monitor/peaker.h>
+#include <dockertask.h>
+#include <utils>
+#include <iostream>
+#include <pthread.h>
 
 class Monitor {
 private:
     int monitor_id;
-
+    Peaker * pkr;
+    
 public:
     Monitor();
 
     ~Monitor();
 
-    bool run(); 
+    assign_task(DockerTask * task);
+
+    std::string get_pulse() {
 };
 
 #endif
