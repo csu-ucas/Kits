@@ -1,11 +1,17 @@
 # Kubenetes in the Sky (Kits)
+## Prerequisite
+0. cmake
+1. Linux Kernel 
+2. GNU C++ compiler >=4.8 (which should support C++11)
+
 ## Developing and Debugging Process
-0. Put your header files in `$BASE_DIR/include` and source files (.cpp) at `$BASE_DIR/src`
-1. Modify `CMakeLists.txt` over the source files you would like to include
-2. run `cmake .`
-3. run `make`
-4. run `./debug`
-4. Remove all your binaries and cmake caches before you commit
+0. Please checkout to a new branch before you make any modifications
+1. Put your header files in `$BASE_DIR/include` and source files (.cpp) at `$BASE_DIR/src`
+2. Modify `CMakeLists.txt` over the source files you would like to include
+3. run `cmake .`
+4. run `make`
+5. run `./debug`
+6. Remove all your binaries and cmake caches before you commit
 
 ## Modules
 ### Monitor (by xwan)
