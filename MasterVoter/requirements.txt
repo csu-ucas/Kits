@@ -1,0 +1,2 @@
+getmac >= 0.8
+mysql-connector-python >=
