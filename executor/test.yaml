@@ -1,0 +1,36 @@
+# type: image
+# act:
+#   opt: list
+#   all: True
+
+# type: container
+# act:
+#   opt: list
+#   all: True
+  
+# type: container
+# act:
+#   opt: create
+#   image: ubuntu
+#   command: /bin/bash
+#   name: exec_test2
+#   detach: True
+
+# type: container
+# act:
+#   opt: start
+#   name: 2075e63d 
+
+# type: container
+# act:
+#   opt: run
+#   image: ubuntu
+#   command: /bin/bash
+#   name: execu_test4
+#   detach: True
+
+# type: container
+# act:
+#   opt: stop
+#   name: 7229f5a7f2e4
+#   timeout: 3
