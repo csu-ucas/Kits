@@ -25,7 +25,7 @@ class MasterVoter(object):
                 print(e)
                 print("Port %d already in use, Checking %d"%(i, i+1))
                 continue 
-        return s 
+        return -1
     
     def __send(self, hostname, str):
         pass 
