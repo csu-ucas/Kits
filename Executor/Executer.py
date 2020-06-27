@@ -13,7 +13,7 @@ class Executer:
             data = f.read()
             f.close()
         except IOError:
-            print("Error: 没有找到文件或读取文件失败")
+            print("Error: File not found")
 
         try:
             data = yaml.load(data, Loader=yaml.Loader)
@@ -23,14 +23,16 @@ class Executer:
                 mark = exc.problem_mark
                 print("Error position: (%s:%s)" % (mark.line + 1, mark.column + 1))
 
-        if (type(data).__name__ == 'dict') and ('type' in data.keys()) and (data['type'] == 'container'):
-            self.container(data)
-        elif (type(data).__name__ == 'dict') and ('type' in data.keys()) and (data['type'] == 'image'):
-            self.image(data)
+        if (type(data).__name__ == 'dict') and ('type' in data.keys()) \
+            and (data['type'] == 'container'):
+            self.__container(data)
+        elif (type(data).__name__ == 'dict') and ('type' in data.keys()) \
+            and (data['type'] == 'image'):
+            self.__image(data)
         else:
             print('Please lable right type in yaml file')
 
-    def container(self, data):
+    def __container(self, data):
         para = ''
         if 'act' not in data.keys():
             print('Please lable right act in yaml file')
@@ -38,7 +40,8 @@ class Executer:
         for i, key in enumerate(data['act'].keys()):
             if key == 'opt':
                 continue
-            if key=='name' and (data['act']['opt'] == 'start' or data['act']['opt'] == 'stop'):
+            if key=='name' and (data['act']['opt'] == 'start' or \
+                data['act']['opt'] == 'stop'):
                 continue
             para += key
             para += '='
@@ -52,7 +55,8 @@ class Executer:
             client = docker.from_env()
 
             if data['act']['opt'] == 'start' or data['act']['opt'] == 'stop':
-                st = 'client.containers.get(container_id =%s)' % ('"'+data['act']['name']+'"')
+                st = 'client.containers.get(container_id =%s)' % \
+                    ('"'+data['act']['name']+'"')
                 container=eval(st)
                 st = 'container.%s(%s)' % (data['act']['opt'],para)
             else:
@@ -67,10 +71,12 @@ class Executer:
                 for i in res:
                     print(i.id[:8],i.image,i.name,i.status)
                 return res
-        except (docker.errors.DeprecatedMethod,docker.errors.ContainerError,docker.errors.NotFound, docker.errors.ImageNotFound, docker.errors.APIError,TypeError ) as e:
-            print('数据错误:',e)
+        except (docker.errors.DeprecatedMethod,docker.errors.ContainerError, \
+                docker.errors.NotFound,docker.errors.ImageNotFound, \
+                docker.errors.APIError,TypeError ) as e:
+            print('Data Error:',e)
 
-    def image(self, data):
+    def __image(self, data):
         para = ''
         for i, key in enumerate(data['act'].keys()):
             if key == 'opt':
@@ -95,5 +101,7 @@ class Executer:
                 for i in res:
                     print(i.id,i.tags)
                 return res
-        except (docker.errors.DeprecatedMethod,docker.errors.ContainerError,docker.errors.NotFound, docker.errors.ImageNotFound, docker.errors.APIError,TypeError) as e:
-            print('数据错误:',e)
+        except (docker.errors.DeprecatedMethod,docker.errors.ContainerError, \
+                docker.errors.NotFound,docker.errors.ImageNotFound, \
+                docker.errors.APIError,TypeError ) as e:
+            print('Data Error:',e)

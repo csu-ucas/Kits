@@ -3,10 +3,10 @@
 #   opt: list
 #   all: True
 
-# type: container
-# act:
-#   opt: list
-#   all: True
+type: container
+act:
+  opt: list
+  all: True
   
 # type: container
 # act:
