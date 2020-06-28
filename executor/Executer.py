@@ -1,7 +1,7 @@
-import docker
-import yaml
 import os
 
+import docker
+import yaml
 
 class Executer: 
     def __init__(self):

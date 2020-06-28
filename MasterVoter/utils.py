@@ -11,6 +11,8 @@ def ping(hostname):
     except:
         return 0x7fff
 
+def 
+
 
 if __name__ == "__main__":
     print(ping("baidu.com"))
