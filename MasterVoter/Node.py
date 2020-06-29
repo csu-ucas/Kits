@@ -30,7 +30,7 @@ class Node(object):
         )
         self.__dbcursor = self.__db.cursor(buffered=True)
         self.__registerNode(self.__ip, self.__mac, self.__role)
-        self.__procFuncDict = {
+        self.__procFuncDict = {cd
             'query': self.__query,
             'join': self.__join,     # only valid when role is Master
             'vote': self.__vote,
@@ -175,7 +175,8 @@ class Node(object):
             info = json.loads(msg)
             '''
             info = {
-                type:"" (query, join_cluster, vote_info, order),
+                type:"" (query, query_response,
+                        join_cluster, vote_info, order),
                 'body':{
                     port:int
                     ip: str
@@ -198,10 +199,7 @@ class Node(object):
                     'port': LISTEN_PORT
                 }
             }))
-            send_skt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            send_skt.connect((INIT_CONTACT_IP, targetPort))
-            send_skt.sendall(message.encode())
-            send_skt.close()
+            self.__send(INIT_CONTACT_IP, LISTEN_PORT， query_rq)
             
 
 
