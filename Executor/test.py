@@ -1,7 +1,7 @@
-from Executer import Executer
+from Executor import Executor
 import _thread
 
-exe1 = Executer()
+exe1 = Executor()
 path = './test.yaml'
 
 exe1.executeFile(path)
