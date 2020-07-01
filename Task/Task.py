@@ -36,9 +36,9 @@ class Task:
         self.createTime = datetime.datetime.strftime(
             datetime.datetime.now(), '%Y-%m-%d %H:%M:%S')
 
-        sql="insert into `tasks`(`name`,`containerCopies`,`imageList`, \
-            `specifyNode`,`compType`,`compNum`,`compMemory`,`compStorage`, \
-            `createTime`) values('"+name+"',"+containerCopies+",'"+imageList+ \
+        sql="insert into `tasks`(`name`,`containerCopies`,`imageList`, " + \
+            "`specifyNode`,`compType`,`compNum`,`compMemory`,`compStorage`," + \
+            "`createTime`) values('"+name+"',"+containerCopies+",'"+imageList+ \
             "','"+ specifyNode+"','"+compType+"',"+compNum+",'"+compMemory+ \
             "','"+ compStorage+"','"+self.createTime+"'"
         self.__connectDb(sql)
