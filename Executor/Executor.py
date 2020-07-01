@@ -18,10 +18,10 @@ class Executor:
 
         try:
             data = yaml.load(data, Loader=yaml.Loader)
-        except yaml.YAMLError as exec:
+        except yaml.YAMLError as exc:
             print('Error in data:')
-            if hasattr(exec, 'problem_mark'):
-                mark = exec.problem_mark
+            if hasattr(exc, 'problem_mark'):
+                mark = exc.problem_mark
                 print("Error position: (%s:%s)" % (mark.line + 1, mark.column + 1))
 
         if (type(data).__name__ == 'dict') and ('type' in data.keys()) \
