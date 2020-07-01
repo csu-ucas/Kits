@@ -1,15 +1,25 @@
-from  MasterVoter.Node import Node
 from Task.Comp import Comp
 import datetime
 import mysql.connector
 
 class Task:
-    # init
+    '''
+    init
+    'containerCopies' is the number of containers.
+    'imageList' is the images user need.
+    'specifyNode' signify which node to run the task
+    (if user dosen't choose the special node ,
+     __initNode will choose a proper node).
+    'compType' signify that the task use CPU or GPU or FPGA.
+    'compNum' signify the number of comp
+    'compMemory' limit the memory to run the task
+    'compStorage' limit the storage to run the task
+    '''
     def __init__(self,name, containerCopies, imageList, specifyNode,
                  compType, compNum, compMemory, compStorage):
         sql="select * from `tasks` where name='"+name+"'"
         if len(self.__connectDb(sql))>=1:
-            print('ERROR: This name already exited')
+            print('ERROR: This name already exites')
             return
 
         self.name=name
@@ -44,11 +54,6 @@ class Task:
         mydb.commit()
         return mycursor
     
-    def query(self,sql):
-        return self.__connectDb(sql)
-    
     # choose a suitable Node
     def __initNode(self):
         return 
-if __name__ == "__name__":
-    Task.query("select * from `tasks`")
