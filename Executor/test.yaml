@@ -3,10 +3,10 @@
 #   opt: list
 #   all: True
 
-type: container
-act:
-  opt: list
-  all: True
+# type: container
+# act:
+#   opt: list
+#   all: True
   
 # type: container
 # act:
@@ -21,13 +21,13 @@ act:
 #   opt: start
 #   name: 2075e63d 
 
-# type: container
-# act:
-#   opt: run
-#   image: ubuntu
-#   command: /bin/bash
-#   name: execu_test4
-#   detach: True
+type: container
+act:
+  opt: run
+  image: ubuntu
+  # command: /bin/bash
+  name: execu_test8
+  detach: True
 
 # type: container
 # act:

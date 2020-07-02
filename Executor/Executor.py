@@ -15,6 +15,7 @@ class Executor:
             f.close()
         except IOError:
             print("Error: File not found")
+            return
 
         try:
             data = yaml.load(data, Loader=yaml.Loader)
@@ -66,7 +67,7 @@ class Executor:
             res = eval(st)
 
             if data['act']['opt'] in ['create', 'run', 'start', 'stop']:
-                print('%s sucessfully' % data['act']['opt'])
+                print('%s %s sucessfully' % (data['act']['name'],data['act']['opt']))
                 return '%s sucessfully' % data['act']['opt']
             else:
                 for i in res:
@@ -96,7 +97,7 @@ class Executor:
             st = 'client.images.%s(%s)' % (data['act']['opt'], para)
             res = eval(st)
             if data['act']['opt'] == 'pull' or data['act']['opt'] == 'push':
-                print('%s sucessfully' % data['act']['opt'])
+                print('%s %s sucessfully' % (data['act']['name'],data['act']['opt']))
                 return '%s sucessfully' % data['act']['opt']
             else:
                 for i in res:
