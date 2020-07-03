@@ -2,7 +2,7 @@
 
 ## Excutor
 need a yaml to create/run/start/list/stop containers or pull/push images
-the formate refer test.yaml
+the formate refers to test.yaml
 
 ## Task
 the task for users to create
