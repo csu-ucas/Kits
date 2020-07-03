@@ -9,4 +9,4 @@ the formate refers to test.yaml
 the task for users to create
 
 ## Scheduler
-Scheduler the order of the tasks and so on
+schedule the order of the tasks and so on
