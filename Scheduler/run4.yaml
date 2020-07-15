@@ -1,0 +1,7 @@
+type: container
+act:
+  name: test4_ubuntu
+  detach: true
+  mem_limit: 100m
+  opt: run
+  image: ubuntu

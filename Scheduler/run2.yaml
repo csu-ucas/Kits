@@ -1,7 +1,7 @@
 type: container
 act:
-  name: task_test_2
-  image: ubuntu
+  name: test2_ubuntu
   detach: true
   mem_limit: 100m
   opt: run
+  image: ubuntu

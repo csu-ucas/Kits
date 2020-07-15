@@ -1,0 +1,8 @@
+type: container
+act:
+  name: test1_alpine
+  detach: true
+  mem_limit: 100m
+  opt: run
+  image: alpine
+  

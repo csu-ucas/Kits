@@ -1,13 +1,20 @@
-from Task.Comp import Comp
 import datetime
 import mysql.connector
+import docker
+import os
+import sys
 
+current_path = os.path.dirname(os.path.realpath(__file__))
+fatherPath = os.path.abspath( \
+                            os.path.dirname(current_path) \
+                            + os.path.sep + ".")
+sys.path.append(fatherPath)  
+
+from Executor.Executor import Executor
 
 class Task:
     '''
     init
-    'containerCopies' is the number of containers.
-    'imageList' is the images user need.
     'specifyNode' signify which node to run the task
     (if user dosen't choose the special node ,
      __initNode will choose a proper node).
@@ -17,33 +24,35 @@ class Task:
     'compStorage' limit the storage to run the task
     '''
 
-    def __init__(self, name, containerCopies, image, specifyNode,
-                 compType, compNum, compMemory):
+    def __init__(self, name, specifyNode,containerPaths,
+                 compType, compNum, compMemory,priority):
         sql = "select * from `tasks` where name='" + name + "'"
         if len(self.__connectDb(sql)) >= 1:
             print('ERROR: This name already exites')
             return
 
+        self.__containers=[]
         self.__name = name
-        self.__containerCopies = containerCopies
-        self.__image = image
         if(specifyNode == None):
             self.__specifyNode = self.__initNode()
         else:
             self.__specifyNode = specifyNode
+        self.__containerPaths=containerPaths
         self.__comp = compType
         self.__compNum = compNum
         self.__compMemory = compMemory
         self.__createTime = datetime.datetime.strftime(
             datetime.datetime.now(), '%Y-%m-%d %H:%M:%S.%f')
+        self.__priority=priority
 
-        sql = "insert into `tasks`(`name`,`containerCopies`,"+ \
-            "`imageList`, `specifyNode`,`compType`,`compNum`,"+ \
-            "`compMemory`,`createTime`) values('" + name + "',"+ \
-            str(containerCopies) + ",'" + image + "','" + \
-            str(specifyNode) + "','" + compType + "'," + str(compNum) \
-            + ",'" + compMemory + "','" + self.__createTime + "')"
-        self.__connectDb(sql)
+        
+    def getContainerNames(self):
+        names=''
+        for i,container in enumerate(self.__containers):
+            names+=(container.name)
+            if i + 1 != len(self.__containers):
+                names += ','
+        return names
 
     def deleteSelf(self):
         sql="delete from tasks where name='" +\
@@ -66,8 +75,28 @@ class Task:
         else:
             return mycursor.fetchall()
 
-    def forSort(self):
+    def getContainers(self):
+        executor = Executor()
+        for path in self.__containerPaths:
+            self.__containers.append(executor.executeFile(path))
+
+        sql = "insert into `tasks`(`name`,`containers`,"+ \
+            " `specifyNode`,`compType`,`compNum`,"+ \
+            "`compMemory`,`createTime`,`priority`) values('" + \
+            self.__name + "','" + self.getContainerNames()+"','"  + \
+            str(self.__specifyNode) + "','" + self.__comp + "'," +\
+            str(self.__compNum) +",'" + self.__compMemory + "','" +\
+            self.__createTime + "','"+str(self.__priority) + "')"
+        print(sql)
+        # self.__connectDb(sql)
+
+
+
+    def forSortTime(self):
         return self.__createTime
+    
+    def forSortPriority(self):
+        return self.__priority,self.__createTime
 
     # choose a suitable Node
     def __initNode(self):

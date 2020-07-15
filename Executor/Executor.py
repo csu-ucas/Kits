@@ -27,18 +27,20 @@ class Executor:
 
         if (type(data).__name__ == 'dict') and ('type' in data.keys()) \
                 and (data['type'] == 'container'):
-            self.__container(data)
+            return self.__container(data)
         elif (type(data).__name__ == 'dict') and ('type' in data.keys()) \
                 and (data['type'] == 'image'):
-            self.__image(data)
+            return self.__image(data)
         else:
             print('Please lable right type in yaml file')
 
-    def __container(self, data):
+    def __container(self,data):
         para = ''
         if 'act' not in data.keys():
             print('Please lable right act in yaml file')
             return
+        data['act']['detach']=True
+        
         for i, key in enumerate(data['act'].keys()):
             if key == 'opt':
                 continue
@@ -53,6 +55,7 @@ class Executor:
                 para += str(data['act'][key])
             if i + 1 != len(data['act']):
                 para += ','
+
         try:
             client = docker.from_env()
 
@@ -68,17 +71,17 @@ class Executor:
 
             if data['act']['opt'] in ['create', 'run', 'start', 'stop']:
                 print('%s %s sucessfully' % (data['act']['name'],data['act']['opt']))
-                return '%s sucessfully' % data['act']['opt']
             else:
                 for i in res:
                     print(i.id[:8], i.image, i.name, i.status)
-                return res
+            return res
+
         except (docker.errors.DeprecatedMethod, docker.errors.ContainerError,
                 docker.errors.NotFound, docker.errors.ImageNotFound,
                 docker.errors.APIError, TypeError) as e:
             print('Data Error:', e)
 
-    def __image(self, data):
+    def __image(self,data):
         para = ''
         for i, key in enumerate(data['act'].keys()):
             if key == 'opt':
@@ -102,7 +105,7 @@ class Executor:
             else:
                 for i in res:
                     print(i.id, i.tags)
-                return res
+            return res
         except (docker.errors.DeprecatedMethod, docker.errors.ContainerError,
                 docker.errors.NotFound, docker.errors.ImageNotFound,
                 docker.errors.APIError, TypeError) as e:
